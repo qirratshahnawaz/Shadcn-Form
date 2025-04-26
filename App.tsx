@@ -2,11 +2,10 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Lock, Plus, Minus, } from "lucide-react"
+import { Lock, Plus, Minus } from "lucide-react"
 import Step1 from "./Steps/Step1"
 import Step2 from "./Steps/Step2"
 import Step3 from "./Steps/Step3"
-import Step4 from "./Steps/Step4"
 import Image from "next/image"
 import Step5 from "./Steps/Step5"
 import icon from "@/public/i.png"
@@ -39,7 +38,6 @@ import tool from "@/public/tool.png"
 import drawer from "@/public/drawer.png"
 import bars from "@/public/bars.png"
 import welcome from "@/public/welcome.png"
-
 
 interface ExpandedSections {
   quickSelection: boolean
@@ -94,7 +92,6 @@ function App() {
     email: false,
     tool: false,
     drawer: false,
-
   })
 
   const toggleSection = (section: keyof ExpandedSections) => {
@@ -108,7 +105,7 @@ function App() {
     <div className="min-h-screen bg-white">
       <header className="border-b border-gray-200 w-full">
         <div className="container mx-auto px-4">
-          <div className="flex items-center h-16">
+          <div className="flex items-center h-12 sm:h-16">
             <a href="#" className="flex items-center">
               <Lock className="h-8 w-8 text-yellow-400" />
               <div className="ml-2">
@@ -121,8 +118,8 @@ function App() {
       </header>
 
       {/* Main Content*/}
-      <main className="container mx-auto px-4 py-8 max-w-3xl">
-        <h1 className="text-2xl font-bold text-gray-800 mb-6">Shadcn Form</h1>
+      <main className="container mx-auto px-2 sm:px-4 py-4 sm:py-8 max-w-3xl">
+        <h1 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4 sm:mb-6">Shadcn Form</h1>
 
         <div className="mb-6">
           <a href="#" className="text-blue-500 hover:underline flex items-center">
@@ -135,14 +132,14 @@ function App() {
 
         {/* Step 1 */}
         <div className="mb-6">
-          <div className="bg-yellow-500 py-4 px-6 font-bold text-white">Schritt 1: Schnellauswahl</div>
+          <div className="bg-yellow-500 py-3 sm:py-4 px-4 sm:px-6 font-bold text-white">Schritt 1: Schnellauswahl</div>
           <Card className="mt-4 shadow-none">
             <CardContent className="p-0">
-              <div className="flex h-16">
-                <div className="p-2 m-4 bg-gray-100 flex items-center justify-center">
+              <div className="flex flex-col sm:flex-row h-auto sm:h-16">
+                <div className="p-2 m-2 sm:m-4 bg-gray-100 flex items-center justify-center">
                   <div className="w-30 h-14 relative">
                     <Image
-                      src={bars}
+                      src={bars || "/placeholder.svg"}
                       width={60}
                       height={60}
                       alt="Icon"
@@ -150,10 +147,8 @@ function App() {
                     />
                   </div>
                 </div>
-                <div className="flex-grow bg-green-600 text-white flex items-center px-4">
-                  <span>
-                    Allgemeine Angaben: Betroffenenrechte, Rechtsgrundlagen, Datentransfers, Löschung, etc.
-                  </span>
+                <div className="flex-grow bg-green-600 text-white flex items-center px-4 py-3 sm:py-0 text-sm sm:text-base">
+                  <span>Allgemeine Angaben: Betroffenenrechte, Rechtsgrundlagen, Datentransfers, Löschung, etc.</span>
                 </div>
                 <Button
                   className="m-0 rounded-none bg-blue-600 hover:bg-green-700 text-white w-14 h-18 p-0 flex items-center justify-center"
@@ -166,26 +161,23 @@ function App() {
           </Card>
 
           {/* Expanded preamble section */}
-          {expandedSections.quickSelection && (
-            <Step1 />
-          )}
-
+          {expandedSections.quickSelection && <Step1 />}
         </div>
 
         {/* Step 2 */}
         <div className="mb-6">
-          <div className="bg-yellow-500 py-4 px-6 font-bold text-white">
+          <div className="bg-yellow-500 py-3 sm:py-4 px-4 sm:px-6 font-bold text-white">
             Schritt 2: Individualisierung und Feinauswahl
           </div>
 
           {/* Contact Information Section */}
           <Card className="mt-4 shadow-none">
             <CardContent className="p-0">
-              <div className="flex h-16">
-                <div className="p-2 m-4 bg-gray-100 flex items-center justify-center">
+              <div className="flex flex-col sm:flex-row h-auto sm:h-16">
+                <div className="p-2 m-2 sm:m-4 bg-gray-100 flex items-center justify-center">
                   <div className="w-30 h-14 relative">
                     <Image
-                      src={welcome}
+                      src={welcome || "/placeholder.svg"}
                       width={60}
                       height={60}
                       alt="Icon"
@@ -193,10 +185,8 @@ function App() {
                     />
                   </div>
                 </div>
-                <div className="flex-grow bg-green-600 text-white flex items-center px-4">
-                  <span>
-                    Allgemeine Angaben: Betroffenenrechte, Rechtsgrundlagen, Datentransfers, Löschung, etc.
-                  </span>
+                <div className="flex-grow bg-green-600 text-white flex items-center px-4 py-3 sm:py-0 text-sm sm:text-base">
+                  <span>Allgemeine Angaben: Betroffenenrechte, Rechtsgrundlagen, Datentransfers, Löschung, etc.</span>
                 </div>
                 <Button
                   className="m-0 rounded-none bg-blue-600 hover:bg-green-700 text-white w-14 h-18 p-0 flex items-center justify-center"
@@ -209,18 +199,16 @@ function App() {
           </Card>
 
           {/* Expanded preamble section */}
-          {expandedSections.contactInfo && (
-            <Step2 />
-          )}
+          {expandedSections.contactInfo && <Step2 />}
 
           {/* Country Selection Section */}
           <Card className="mt-4 shadow-none">
             <CardContent className="p-0">
-              <div className="flex h-16">
-                <div className="p-2 m-4 bg-gray-100 flex items-center justify-center">
+              <div className="flex flex-col sm:flex-row h-auto sm:h-16">
+                <div className="p-2 m-2 sm:m-4 bg-gray-100 flex items-center justify-center">
                   <div className="w-30 h-14 relative">
                     <Image
-                      src={icon}
+                      src={icon || "/placeholder.svg"}
                       width={60}
                       height={60}
                       alt="Icon"
@@ -228,10 +216,8 @@ function App() {
                     />
                   </div>
                 </div>
-                <div className="flex-grow bg-green-600 text-white flex items-center px-4">
-                  <span>
-                    Allgemeine Angaben: Betroffenenrechte, Rechtsgrundlagen, Datentransfers, Löschung, etc.
-                  </span>
+                <div className="flex-grow bg-green-600 text-white flex items-center px-4 py-3 sm:py-0 text-sm sm:text-base">
+                  <span>Allgemeine Angaben: Betroffenenrechte, Rechtsgrundlagen, Datentransfers, Löschung, etc.</span>
                 </div>
                 <Button
                   className="m-0 rounded-none bg-blue-600 hover:bg-green-700 text-white w-14 h-18 p-0 flex items-center justify-center"
@@ -244,18 +230,16 @@ function App() {
           </Card>
 
           {/* Expanded preamble section */}
-          {expandedSections.countrySelection && (
-            <Step3 />
-          )}
+          {expandedSections.countrySelection && <Step3 />}
 
           {/* Preamble Section */}
           <Card className="mt-4 shadow-none">
             <CardContent className="p-0">
-              <div className="flex h-16">
-                <div className="p-2 m-4 bg-gray-100 flex items-center justify-center">
+              <div className="flex flex-col sm:flex-row h-auto sm:h-16">
+                <div className="p-2 m-2 sm:m-4 bg-gray-100 flex items-center justify-center">
                   <div className="w-30 h-14 relative">
                     <Image
-                      src={icon}
+                      src={icon || "/placeholder.svg"}
                       width={60}
                       height={60}
                       alt="Icon"
@@ -263,10 +247,8 @@ function App() {
                     />
                   </div>
                 </div>
-                <div className="flex-grow bg-green-600 text-white flex items-center px-4">
-                  <span>
-                    Allgemeine Angaben: Betroffenenrechte, Rechtsgrundlagen, Datentransfers, Löschung, etc.
-                  </span>
+                <div className="flex-grow bg-green-600 text-white flex items-center px-4 py-3 sm:py-0 text-sm sm:text-base">
+                  <span>Allgemeine Angaben: Betroffenenrechte, Rechtsgrundlagen, Datentransfers, Löschung, etc.</span>
                 </div>
                 <Button
                   className="m-0 rounded-none bg-blue-600 hover:bg-green-700 text-white w-14 h-18 p-0 flex items-center justify-center"
@@ -279,18 +261,16 @@ function App() {
           </Card>
 
           {/* Expanded preamble section */}
-          {expandedSections.preamble && (
-            <Step5 />
-          )}
+          {expandedSections.preamble && <Step5 />}
 
           {/* inform */}
           <Card className="mt-4 shadow-none">
             <CardContent className="p-0">
-              <div className="flex h-16">
-                <div className="p-2 m-4 bg-gray-100 flex items-center justify-center">
+              <div className="flex flex-col sm:flex-row h-auto sm:h-16">
+                <div className="p-2 m-2 sm:m-4 bg-gray-100 flex items-center justify-center">
                   <div className="w-30 h-14 relative">
                     <Image
-                      src={icon}
+                      src={icon || "/placeholder.svg"}
                       width={60}
                       height={60}
                       alt="Icon"
@@ -298,10 +278,8 @@ function App() {
                     />
                   </div>
                 </div>
-                <div className="flex-grow bg-green-600 text-white flex items-center px-4">
-                  <span>
-                    Allgemeine Angaben: Betroffenenrechte, Rechtsgrundlagen, Datentransfers, Löschung, etc.
-                  </span>
+                <div className="flex-grow bg-green-600 text-white flex items-center px-4 py-3 sm:py-0 text-sm sm:text-base">
+                  <span>Allgemeine Angaben: Betroffenenrechte, Rechtsgrundlagen, Datentransfers, Löschung, etc.</span>
                 </div>
                 <Button
                   className="m-0 rounded-none bg-blue-600 hover:bg-green-700 text-white w-14 h-18 p-0 flex items-center justify-center"
@@ -314,17 +292,15 @@ function App() {
           </Card>
 
           {/* Expanded preamble section */}
-          {expandedSections.inform && (
-            <Step5 />
-          )}
+          {expandedSections.inform && <Step5 />}
           {/*persons  */}
           <Card className="mt-4 shadow-none">
             <CardContent className="p-0">
-              <div className="flex h-16">
-                <div className="p-2 m-3 bg-gray-100 flex items-center justify-center">
+              <div className="flex flex-col sm:flex-row h-auto sm:h-16">
+                <div className="p-2 m-2 sm:m-4 bg-gray-100 flex items-center justify-center">
                   <div className="w-30 h-14 relative">
                     <Image
-                      src={persons}
+                      src={persons || "/placeholder.svg"}
                       width={60}
                       height={60}
                       alt="Icon"
@@ -332,10 +308,8 @@ function App() {
                     />
                   </div>
                 </div>
-                <div className="flex-grow bg-green-600 text-white flex items-center px-4">
-                  <span>
-                    Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).
-                  </span>
+                <div className="flex-grow bg-green-600 text-white flex items-center px-4 py-3 sm:py-0 text-sm sm:text-base">
+                  <span>Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).</span>
                 </div>
                 <Button
                   className="m-0 rounded-none bg-blue-600 hover:bg-green-700 text-white w-14 h-18 p-0 flex items-center justify-center"
@@ -348,18 +322,16 @@ function App() {
           </Card>
 
           {/* Expanded preamble section */}
-          {expandedSections.persons && (
-            <Step8 />
-          )}
+          {expandedSections.persons && <Step8 />}
 
           {/* euro */}
           <Card className="mt-4 shadow-none">
             <CardContent className="p-0">
-              <div className="flex h-16">
-                <div className="p-2 m-3 bg-gray-100 flex items-center justify-center">
+              <div className="flex flex-col sm:flex-row h-auto sm:h-16">
+                <div className="p-2 m-2 sm:m-4 bg-gray-100 flex items-center justify-center">
                   <div className="w-30 h-14 relative">
                     <Image
-                      src={euro}
+                      src={euro || "/placeholder.svg"}
                       width={60}
                       height={60}
                       alt="Icon"
@@ -367,10 +339,8 @@ function App() {
                     />
                   </div>
                 </div>
-                <div className="flex-grow bg-green-600 text-white flex items-center px-4">
-                  <span>
-                    Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).
-                  </span>
+                <div className="flex-grow bg-green-600 text-white flex items-center px-4 py-3 sm:py-0 text-sm sm:text-base">
+                  <span>Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).</span>
                 </div>
                 <Button
                   className="m-0 rounded-none bg-blue-600 hover:bg-green-700 text-white w-14 h-18 p-0 flex items-center justify-center"
@@ -383,18 +353,16 @@ function App() {
           </Card>
 
           {/* Expanded preamble section */}
-          {expandedSections.euro && (
-            <Step9 />
-          )}
+          {expandedSections.euro && <Step9 />}
 
           {/* calculator  */}
           <Card className="mt-4 shadow-none">
             <CardContent className="p-0">
-              <div className="flex h-16">
-                <div className="p-2 m-3 bg-gray-100 flex items-center justify-center">
+              <div className="flex flex-col sm:flex-row h-auto sm:h-16">
+                <div className="p-2 m-2 sm:m-4 bg-gray-100 flex items-center justify-center">
                   <div className="w-30 h-14 relative">
                     <Image
-                      src={calculator}
+                      src={calculator || "/placeholder.svg"}
                       width={60}
                       height={60}
                       alt="Icon"
@@ -402,10 +370,8 @@ function App() {
                     />
                   </div>
                 </div>
-                <div className="flex-grow bg-green-600 text-white flex items-center px-4">
-                  <span>
-                    Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).
-                  </span>
+                <div className="flex-grow bg-green-600 text-white flex items-center px-4 py-3 sm:py-0 text-sm sm:text-base">
+                  <span>Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).</span>
                 </div>
                 <Button
                   className="m-0 rounded-none bg-blue-600 hover:bg-green-700 text-white w-14 h-18 p-0 flex items-center justify-center"
@@ -418,18 +384,16 @@ function App() {
           </Card>
 
           {/* Expanded preamble section */}
-          {expandedSections.calculator && (
-            <Step9 />
-          )}
+          {expandedSections.calculator && <Step9 />}
 
           {/* thumbs */}
           <Card className="mt-4 shadow-none">
             <CardContent className="p-0">
-              <div className="flex h-16">
-                <div className="p-2 m-3 bg-gray-100 flex items-center justify-center">
+              <div className="flex flex-col sm:flex-row h-auto sm:h-16">
+                <div className="p-2 m-2 sm:m-4 bg-gray-100 flex items-center justify-center">
                   <div className="w-30 h-14 relative">
                     <Image
-                      src={rank}
+                      src={rank || "/placeholder.svg"}
                       width={30}
                       height={30}
                       alt="Icon"
@@ -437,10 +401,8 @@ function App() {
                     />
                   </div>
                 </div>
-                <div className="flex-grow bg-green-600 text-white flex items-center px-4">
-                  <span>
-                    Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).
-                  </span>
+                <div className="flex-grow bg-green-600 text-white flex items-center px-4 py-3 sm:py-0 text-sm sm:text-base">
+                  <span>Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).</span>
                 </div>
                 <Button
                   className="m-0 rounded-none bg-blue-600 hover:bg-green-700 text-white w-14 h-18 p-0 flex items-center justify-center"
@@ -453,18 +415,16 @@ function App() {
           </Card>
 
           {/* Expanded preamble section */}
-          {expandedSections.thumbs && (
-            <Step9 />
-          )}
+          {expandedSections.thumbs && <Step9 />}
 
           {/* cookie */}
           <Card className="mt-4 shadow-none">
             <CardContent className="p-0">
-              <div className="flex h-16">
-                <div className="p-2 m-3 bg-gray-100 flex items-center justify-center">
+              <div className="flex flex-col sm:flex-row h-auto sm:h-16">
+                <div className="p-2 m-2 sm:m-4 bg-gray-100 flex items-center justify-center">
                   <div className="w-30 h-14 relative">
                     <Image
-                      src={cookie}
+                      src={cookie || "/placeholder.svg"}
                       width={60}
                       height={60}
                       alt="Icon"
@@ -472,10 +432,8 @@ function App() {
                     />
                   </div>
                 </div>
-                <div className="flex-grow bg-green-600 text-white flex items-center px-4">
-                  <span>
-                    Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).
-                  </span>
+                <div className="flex-grow bg-green-600 text-white flex items-center px-4 py-3 sm:py-0 text-sm sm:text-base">
+                  <span>Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).</span>
                 </div>
                 <Button
                   className="m-0 rounded-none bg-blue-600 hover:bg-green-700 text-white w-14 h-18 p-0 flex items-center justify-center"
@@ -488,18 +446,16 @@ function App() {
           </Card>
 
           {/* Expanded preamble section */}
-          {expandedSections.cookie && (
-            <Step11 />
-          )}
+          {expandedSections.cookie && <Step11 />}
 
           {/* credit */}
           <Card className="mt-4 shadow-none">
             <CardContent className="p-0">
-              <div className="flex h-16">
-                <div className="p-2 p-4 bg-gray-100 flex items-center justify-center">
+              <div className="flex flex-col sm:flex-row h-auto sm:h-16">
+                <div className="p-2 m-2 sm:m-4 bg-gray-100 flex items-center justify-center">
                   <div className="w-30 h-14 relative">
                     <Image
-                      src={credit}
+                      src={credit || "/placeholder.svg"}
                       width={60}
                       height={60}
                       alt="Icon"
@@ -507,10 +463,8 @@ function App() {
                     />
                   </div>
                 </div>
-                <div className="flex-grow bg-green-600 text-white flex items-center px-4">
-                  <span>
-                    Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).
-                  </span>
+                <div className="flex-grow bg-green-600 text-white flex items-center px-4 py-3 sm:py-0 text-sm sm:text-base">
+                  <span>Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).</span>
                 </div>
                 <Button
                   className="m-0 rounded-none bg-blue-600 hover:bg-green-700 text-white w-14 h-18 p-0 flex items-center justify-center"
@@ -522,18 +476,16 @@ function App() {
             </CardContent>
           </Card>
 
-          {expandedSections.credit && (
-            <Step10 />
-          )}
+          {expandedSections.credit && <Step10 />}
 
           {/* headphone */}
           <Card className="mt-4 shadow-none">
             <CardContent className="p-0">
-              <div className="flex h-16">
-                <div className="p-2 m-3 bg-gray-100 flex items-center justify-center">
+              <div className="flex flex-col sm:flex-row h-auto sm:h-16">
+                <div className="p-2 m-2 sm:m-4 bg-gray-100 flex items-center justify-center">
                   <div className="w-30 h-14 relative">
                     <Image
-                      src={headphone}
+                      src={headphone || "/placeholder.svg"}
                       width={60}
                       height={60}
                       alt="Icon"
@@ -541,10 +493,8 @@ function App() {
                     />
                   </div>
                 </div>
-                <div className="flex-grow bg-green-600 text-white flex items-center px-4">
-                  <span>
-                    Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).
-                  </span>
+                <div className="flex-grow bg-green-600 text-white flex items-center px-4 py-3 sm:py-0 text-sm sm:text-base">
+                  <span>Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).</span>
                 </div>
                 <Button
                   className="m-0 rounded-none bg-blue-600 hover:bg-green-700 text-white w-14 h-18 p-0 flex items-center justify-center"
@@ -557,18 +507,16 @@ function App() {
           </Card>
 
           {/* Expanded preamble section */}
-          {expandedSections.headphone && (
-            <Step13 />
-          )}
+          {expandedSections.headphone && <Step13 />}
 
           {/* trophy */}
           <Card className="mt-4 shadow-none">
             <CardContent className="p-0">
-              <div className="flex h-16">
-                <div className="p-2 m-3 bg-gray-100 flex items-center justify-center">
+              <div className="flex flex-col sm:flex-row h-auto sm:h-16">
+                <div className="p-2 m-2 sm:m-4 bg-gray-100 flex items-center justify-center">
                   <div className="w-30 h-14 relative">
                     <Image
-                      src={trophy}
+                      src={trophy || "/placeholder.svg"}
                       width={60}
                       height={60}
                       alt="Icon"
@@ -576,10 +524,8 @@ function App() {
                     />
                   </div>
                 </div>
-                <div className="flex-grow bg-green-600 text-white flex items-center px-4">
-                  <span>
-                    Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).
-                  </span>
+                <div className="flex-grow bg-green-600 text-white flex items-center px-4 py-3 sm:py-0 text-sm sm:text-base">
+                  <span>Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).</span>
                 </div>
                 <Button
                   className="m-0 rounded-none bg-blue-600 hover:bg-green-700 text-white w-14 h-18 p-0 flex items-center justify-center"
@@ -592,18 +538,16 @@ function App() {
           </Card>
 
           {/* Expanded preamble section */}
-          {expandedSections.trophy && (
-            <Step14 />
-          )}
+          {expandedSections.trophy && <Step14 />}
 
           {/* email */}
           <Card className="mt-4 shadow-none">
             <CardContent className="p-0">
-              <div className="flex h-16">
-                <div className="p-2 m-3 bg-gray-100 flex items-center justify-center">
+              <div className="flex flex-col sm:flex-row h-auto sm:h-16">
+                <div className="p-2 m-2 sm:m-4 bg-gray-100 flex items-center justify-center">
                   <div className="w-30 h-14 relative">
                     <Image
-                      src={email}
+                      src={email || "/placeholder.svg"}
                       width={60}
                       height={60}
                       alt="Icon"
@@ -611,10 +555,8 @@ function App() {
                     />
                   </div>
                 </div>
-                <div className="flex-grow bg-green-600 text-white flex items-center px-4">
-                  <span>
-                    Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).
-                  </span>
+                <div className="flex-grow bg-green-600 text-white flex items-center px-4 py-3 sm:py-0 text-sm sm:text-base">
+                  <span>Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).</span>
                 </div>
                 <Button
                   className="m-0 rounded-none bg-blue-600 hover:bg-green-700 text-white w-14 h-18 p-0 flex items-center justify-center"
@@ -627,17 +569,15 @@ function App() {
           </Card>
 
           {/* Expanded preamble section */}
-          {expandedSections.email && (
-            <Step16 />
-          )}
+          {expandedSections.email && <Step16 />}
           {/*profile  */}
           <Card className="mt-4 shadow-none">
             <CardContent className="p-0">
-              <div className="flex h-16">
-                <div className="p-2 m-3 bg-gray-100 flex items-center justify-center">
+              <div className="flex flex-col sm:flex-row h-auto sm:h-16">
+                <div className="p-2 m-2 sm:m-4 bg-gray-100 flex items-center justify-center">
                   <div className="w-30 h-14 relative">
                     <Image
-                      src={profile}
+                      src={profile || "/placeholder.svg"}
                       width={60}
                       height={60}
                       alt="Icon"
@@ -645,10 +585,8 @@ function App() {
                     />
                   </div>
                 </div>
-                <div className="flex-grow bg-green-600 text-white flex items-center px-4">
-                  <span>
-                    Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).
-                  </span>
+                <div className="flex-grow bg-green-600 text-white flex items-center px-4 py-3 sm:py-0 text-sm sm:text-base">
+                  <span>Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).</span>
                 </div>
                 <Button
                   className="m-0 rounded-none bg-blue-600 hover:bg-green-700 text-white w-14 h-18 p-0 flex items-center justify-center"
@@ -661,18 +599,16 @@ function App() {
           </Card>
 
           {/* Expanded preamble section */}
-          {expandedSections.profile && (
-            <Step15 />
-          )}
+          {expandedSections.profile && <Step15 />}
 
           {/* wp */}
           <Card className="mt-4 shadow-none">
             <CardContent className="p-0">
-              <div className="flex h-16">
-                <div className="p-2 m-3 bg-gray-100 flex items-center justify-center">
+              <div className="flex flex-col sm:flex-row h-auto sm:h-16">
+                <div className="p-2 m-2 sm:m-4 bg-gray-100 flex items-center justify-center">
                   <div className="w-30 h-14 relative">
                     <Image
-                      src={wp}
+                      src={wp || "/placeholder.svg"}
                       width={60}
                       height={60}
                       alt="Icon"
@@ -680,10 +616,8 @@ function App() {
                     />
                   </div>
                 </div>
-                <div className="flex-grow bg-green-600 text-white flex items-center px-4">
-                  <span>
-                    Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).
-                  </span>
+                <div className="flex-grow bg-green-600 text-white flex items-center px-4 py-3 sm:py-0 text-sm sm:text-base">
+                  <span>Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).</span>
                 </div>
                 <Button
                   className="m-0 rounded-none bg-blue-600 hover:bg-green-700 text-white w-14 h-18 p-0 flex items-center justify-center"
@@ -696,18 +630,16 @@ function App() {
           </Card>
 
           {/* Expanded preamble section */}
-          {expandedSections.wp && (
-            <Step12 />
-          )}
+          {expandedSections.wp && <Step12 />}
 
           {/*   AD */}
           <Card className="mt-4 shadow-none">
             <CardContent className="p-0">
-              <div className="flex h-16">
-                <div className="p-2 m-3 bg-gray-100 flex items-center justify-center">
+              <div className="flex flex-col sm:flex-row h-auto sm:h-16">
+                <div className="p-2 m-2 sm:m-4 bg-gray-100 flex items-center justify-center">
                   <div className="w-30 h-14 relative">
                     <Image
-                      src={Ad}
+                      src={Ad || "/placeholder.svg"}
                       width={60}
                       height={60}
                       alt="Icon"
@@ -715,10 +647,8 @@ function App() {
                     />
                   </div>
                 </div>
-                <div className="flex-grow bg-green-600 text-white flex items-center px-4">
-                  <span>
-                    Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).
-                  </span>
+                <div className="flex-grow bg-green-600 text-white flex items-center px-4 py-3 sm:py-0 text-sm sm:text-base">
+                  <span>Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).</span>
                 </div>
                 <Button
                   className="m-0 rounded-none bg-blue-600 hover:bg-green-700 text-white w-14 h-18 p-0 flex items-center justify-center"
@@ -731,18 +661,16 @@ function App() {
           </Card>
 
           {/* Expanded preamble section */}
-          {expandedSections.Add && (
-            <Step17 />
-          )}
+          {expandedSections.Add && <Step17 />}
 
           {/* dashboard */}
           <Card className="mt-4 shadow-none">
             <CardContent className="p-0">
-              <div className="flex h-16">
-                <div className="p-2 m-2 bg-gray-100 flex items-center justify-center">
+              <div className="flex flex-col sm:flex-row h-auto sm:h-16">
+                <div className="p-2 m-2 sm:m-4 bg-gray-100 flex items-center justify-center">
                   <div className="w-30 h-14 relative">
                     <Image
-                      src={dashboard}
+                      src={dashboard || "/placeholder.svg"}
                       width={60}
                       height={60}
                       alt="Icon"
@@ -750,10 +678,8 @@ function App() {
                     />
                   </div>
                 </div>
-                <div className="flex-grow bg-green-600 text-white flex items-center px-4">
-                  <span>
-                    Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).
-                  </span>
+                <div className="flex-grow bg-green-600 text-white flex items-center px-4 py-3 sm:py-0 text-sm sm:text-base">
+                  <span>Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).</span>
                 </div>
                 <Button
                   className="m-0 rounded-none bg-blue-600 hover:bg-green-700 text-white w-14 h-18 p-0 flex items-center justify-center"
@@ -766,18 +692,16 @@ function App() {
           </Card>
 
           {/* Expanded preamble section */}
-          {expandedSections.dashboard && (
-            <Step17 />
-          )}
+          {expandedSections.dashboard && <Step17 />}
 
           {/* mouse */}
           <Card className="mt-4 shadow-none">
             <CardContent className="p-0">
-              <div className="flex h-16">
-                <div className="p-2 m-3 bg-gray-100 flex items-center justify-center">
+              <div className="flex flex-col sm:flex-row h-auto sm:h-16">
+                <div className="p-2 m-2 sm:m-4 bg-gray-100 flex items-center justify-center">
                   <div className="w-30 h-14 relative">
                     <Image
-                      src={mouse}
+                      src={mouse || "/placeholder.svg"}
                       width={60}
                       height={60}
                       alt="Icon"
@@ -785,10 +709,8 @@ function App() {
                     />
                   </div>
                 </div>
-                <div className="flex-grow bg-green-600 text-white flex items-center px-4">
-                  <span>
-                    Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).
-                  </span>
+                <div className="flex-grow bg-green-600 text-white flex items-center px-4 py-3 sm:py-0 text-sm sm:text-base">
+                  <span>Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).</span>
                 </div>
                 <Button
                   className="m-0 rounded-none bg-blue-600 hover:bg-green-700 text-white w-14 h-18 p-0 flex items-center justify-center"
@@ -801,18 +723,16 @@ function App() {
           </Card>
 
           {/* Expanded preamble section */}
-          {expandedSections.mouse && (
-            <Step16 />
-          )}
+          {expandedSections.mouse && <Step16 />}
 
           {/* msg */}
           <Card className="mt-4 shadow-none">
             <CardContent className="p-0">
-              <div className="flex h-16">
-                <div className="p-2 m-3 bg-gray-100 flex items-center justify-center">
+              <div className="flex flex-col sm:flex-row h-auto sm:h-16">
+                <div className="p-2 m-2 sm:m-4 bg-gray-100 flex items-center justify-center">
                   <div className="w-30 h-14 relative">
                     <Image
-                      src={msg}
+                      src={msg || "/placeholder.svg"}
                       width={60}
                       height={60}
                       alt="Icon"
@@ -820,10 +740,8 @@ function App() {
                     />
                   </div>
                 </div>
-                <div className="flex-grow bg-green-600 text-white flex items-center px-4">
-                  <span>
-                    Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).
-                  </span>
+                <div className="flex-grow bg-green-600 text-white flex items-center px-4 py-3 sm:py-0 text-sm sm:text-base">
+                  <span>Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).</span>
                 </div>
                 <Button
                   className="m-0 rounded-none bg-blue-600 hover:bg-green-700 text-white w-14 h-18 p-0 flex items-center justify-center"
@@ -836,18 +754,16 @@ function App() {
           </Card>
 
           {/* Expanded preamble section */}
-          {expandedSections.msg && (
-            <Step12 />
-          )}
+          {expandedSections.msg && <Step12 />}
 
           {/* toool */}
           <Card className="mt-4 shadow-none">
             <CardContent className="p-0">
-              <div className="flex h-16">
-                <div className="p-2 m-3 bg-gray-100 flex items-center justify-center">
+              <div className="flex flex-col sm:flex-row h-auto sm:h-16">
+                <div className="p-2 m-2 sm:m-4 bg-gray-100 flex items-center justify-center">
                   <div className="w-30 h-14 relative">
                     <Image
-                      src={tool}
+                      src={tool || "/placeholder.svg"}
                       width={60}
                       height={60}
                       alt="Icon"
@@ -855,10 +771,8 @@ function App() {
                     />
                   </div>
                 </div>
-                <div className="flex-grow bg-green-600 text-white flex items-center px-4">
-                  <span>
-                    Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).
-                  </span>
+                <div className="flex-grow bg-green-600 text-white flex items-center px-4 py-3 sm:py-0 text-sm sm:text-base">
+                  <span>Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).</span>
                 </div>
                 <Button
                   className="m-0 rounded-none bg-blue-600 hover:bg-green-700 text-white w-14 h-18 p-0 flex items-center justify-center"
@@ -871,18 +785,16 @@ function App() {
           </Card>
 
           {/* Expanded preamble section */}
-          {expandedSections.tool && (
-            <Step12 />
-          )}
+          {expandedSections.tool && <Step12 />}
 
           {/* drawer */}
           <Card className="mt-4 shadow-none">
             <CardContent className="p-0">
-              <div className="flex h-16">
-                <div className="p-2 m-3 bg-gray-100 flex items-center justify-center">
+              <div className="flex flex-col sm:flex-row h-auto sm:h-16">
+                <div className="p-2 m-2 sm:m-4 bg-gray-100 flex items-center justify-center">
                   <div className="w- h-14 relative">
                     <Image
-                      src={drawer}
+                      src={drawer || "/placeholder.svg"}
                       width={60}
                       height={60}
                       alt="Icon"
@@ -890,10 +802,8 @@ function App() {
                     />
                   </div>
                 </div>
-                <div className="flex-grow bg-green-600 text-white flex items-center px-4">
-                  <span>
-                    Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).
-                  </span>
+                <div className="flex-grow bg-green-600 text-white flex items-center px-4 py-3 sm:py-0 text-sm sm:text-base">
+                  <span>Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).</span>
                 </div>
                 <Button
                   className="m-0 rounded-none bg-blue-600 hover:bg-green-700 text-white w-14 h-18 p-0 flex items-center justify-center"
@@ -906,12 +816,7 @@ function App() {
           </Card>
 
           {/* Expanded preamble section */}
-          {expandedSections.drawer && (
-            <Step10 />
-          )}
-
-
-
+          {expandedSections.drawer && <Step10 />}
         </div>
       </main>
     </div>

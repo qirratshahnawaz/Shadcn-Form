@@ -26,7 +26,7 @@ const Step7 = () => {
   const [q3, setQ3] = useState<string | null>(null);
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-6 space-y-10 text-black">
+    <div className="max-w-6xl mx-auto px-4 py-6 space-y-10 text-black mt-4">
       {/* Box 1 */}
       <div className="bg-gray-100 p-6 rounded-lg shadow space-y-3">
         <p className="font-medium">

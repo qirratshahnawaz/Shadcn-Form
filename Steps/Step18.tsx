@@ -103,7 +103,7 @@ const Step18: React.FC = () => {
   }
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-4 space-y-8">
+    <div className="w-full max-w-4xl mx-auto p-4 space-y-8 bg-gray-200 mt-4">
       <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
         <div className="mb-6">
           <h2 className="text-lg font-medium mb-2">

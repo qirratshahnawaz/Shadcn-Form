@@ -27,7 +27,7 @@ export default function Step8() {
   };
 
   return (
-    <div className="p-6 bg-gray-100 rounded-md max-w-4xl mx-auto">
+    <div className="p-6 bg-gray-100 rounded-md max-w-4xl mx-auto mt-6">
       <h2 className="text-lg font-semibold mb-2">
         Do you operate according to statutes or rules of procedure? (e.g., as an association or non-profit organization)
       </h2>

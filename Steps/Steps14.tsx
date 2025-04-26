@@ -30,7 +30,7 @@ const Step14 = () => {
   }
 
   return (
-    <div className="flex flex-col gap-4 max-w-3xl">
+    <div className="flex flex-col gap-4 max-w-3xl bg-gray-200 mt-4">
       <Card className="bg-gray-100">
         <CardContent className="p-4">
           <div className="mb-4">

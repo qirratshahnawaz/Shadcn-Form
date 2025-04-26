@@ -31,7 +31,7 @@ export default function Step4() {
   }
 
   return (
-    <div className="p-6 bg-gray-100 rounded-md space-y-10">
+    <div className="p-6 bg-gray-100 rounded-md space-y-10 mt-4">
       <div>
         <p className="mb-2 font-semibold">
           Soll die Datenschutzerklärung allumfassend für Ihre Webseite, Ihre Leistungen (und falls vorhanden, Social

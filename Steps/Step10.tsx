@@ -46,7 +46,7 @@ export default function Step10() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto p-6 space-y-8">
+    <div className="max-w-5xl mx-auto p-6 space-y-8 mt-4">
       <div className="space-y-4">
         <h1 className="text-2xl font-bold text-green-700">Provision of the online offer, hosting, homepage builders</h1>
         <p>Do you offer an online service that is accessed entirely or partially via a server (e.g. website, e-shop, app)?</p>

@@ -37,7 +37,7 @@ export default function Step5() {
   }
 
   return (
-    <div className="space-y-10 p-6 max-w-4xl mx-auto">
+    <div className="space-y-10 p-6 max-w-4xl mx-auto mt-4 bg-slate-100">
       <section className="space-y-4 bg-gray-100 p-6 rounded-lg">
         <h3 className="font-semibold">Möchten Sie auf mögliche Aktualisierungen der Datenschutzerklärung hinweisen?</h3>
 

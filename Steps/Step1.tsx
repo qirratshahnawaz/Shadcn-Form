@@ -25,7 +25,7 @@ const Step1 = () => {
 
   return (
     <>
-      <div className="bg-gray-100 p-8">
+      <div className="bg-gray-100 p-8 mt-4">
         <div className="mb-10 text-left">
           <h2 className="text-2xl font-bold mb-2">Verwendungszwecke Ihrer Daten</h2>
           <p className="text-gray-700 max-w-3xl">

@@ -69,7 +69,7 @@ export default function Step9() {
   }
 
   return (
-    <div className="p-8 space-y-12">
+    <div className="p-8 space-y-12 mt-5">
       <div className="space-y-4 bg-muted p-6 rounded-lg shadow">
         <Label className="text-lg font-semibold">Do you offer commercial or business services?</Label>
         <div className="flex gap-4">

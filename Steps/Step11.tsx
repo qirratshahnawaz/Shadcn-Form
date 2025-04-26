@@ -21,7 +21,7 @@ export default function Step11() {
   };
 
   return (
-    <div className="bg-gray-100 m-3 p-6 rounded-md max-w-2xl mx-auto">
+    <div className="bg-gray-200 m-3 p-6 rounded-md max-w-2xl mx-auto">
       <div className="mb-4">
         <h2 className="text-base font-medium mb-1">
           Do you use cookies (or integrate tools or content into your online offering that use cookies)?
