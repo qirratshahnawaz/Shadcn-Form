@@ -1,339 +1,433 @@
-"use client"
+// ConsentsForm.tsx
+'use client';
 
-import type React from "react"
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
-import { Switch } from "@/components/ui/switch"
-import { Label } from "@/components/ui/label"
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogFooter,
-} from "@/components/ui/dialog"
+import { useState } from 'react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
+import { Input } from '@/components/ui/input';
+import { HelpCircle, Search } from 'lucide-react';
 
-const Step18: React.FC = () => {
-  const [useThirdPartyContent, setUseThirdPartyContent] = useState<boolean>(false)
-  const [useThirdPartyServices, setUseThirdPartyServices] = useState<boolean>(false)
-  const [selectedContentProviders, setSelectedContentProviders] = useState<string[]>([])
-  const [selectedServiceProviders, setSelectedServiceProviders] = useState<string[]>([])
-  const [searchTerm1, setSearchTerm1] = useState<string>("")
-  const [searchTerm2, setSearchTerm2] = useState<string>("")
+const ProviderBox = ({ 
+  name, 
+  isSelected, 
+  onClick 
+}: { 
+  name: string; 
+  isSelected?: boolean; 
+  onClick: () => void;
+}) => {
+  return (
+    <div
+      onClick={onClick}
+      className={`
+        h-20 
+        flex items-center justify-center 
+        text-center 
+        p-2
+        bg-gray-200 
+        hover:bg-green-500 hover:text-white
+        cursor-pointer 
+        transition-colors
+        overflow-hidden
+        ${isSelected ? 'bg-green-500 text-white' : ''}
+      `}
+    >
+      <span className="text-xs sm:text-sm break-words line-clamp-3">{name}</span>
+    </div>
+  );
+};
 
-  // Dialog states
-  const [dialogContent, setDialogContent] = useState<{
-    title: string
-    description: string
-  }>({ title: "", description: "" })
-  const [isDialogOpen, setIsDialogOpen] = useState(false)
+export default function Step18() {
+  const [contactConsent, setContactConsent] = useState<string | null>(null);
+  const [messengerConsent, setMessengerConsent] = useState<string | null>(null);
+  const [chatbotConsent, setChatbotConsent] = useState<string | null>(null);
+  const [pushConsent, setPushConsent] = useState<string | null>(null);
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  
+  const [selectedContactProvider, setSelectedContactProvider] = useState<string>('Kontaktformular');
+  const [selectedMessengerProvider, setSelectedMessengerProvider] = useState<string | null>(null);
+  const [selectedChatbotProvider, setSelectedChatbotProvider] = useState<string | null>(null);
+  
+  const contactProviders = [
+    'Kontaktformular',
+    'Freshdesk',
+    'HappyFox',
+    'Hubspot CRM',
+    'zendesk',
+    'Zendesk'
+  ];
+  
+  const chatbotProviders = [
+    'Alexa (Amazon)',
+    'collect.chat',
+    'Converse',
+    'ManyChat',
+    'customersAI (ehemals ksblabla(today))',
+    'SnatchBot'
+  ];
 
-  const contentProviders = [
-    { id: "scripts", name: "Integration of third-party software, scripts or iframe snippets (e.g. Clarity)" },
-    { id: "facebook", name: "Facebook plugins and content" },
-    { id: "google-fonts-domain", name: "Google Fonts (domain and cdn server)" },
-    { id: "google-fonts-local", name: "Google Fonts (loaded from Google server)" },
-    { id: "font-awesome", name: "Font Awesome (domain and cdn server)" },
-    { id: "google-maps", name: "Google Maps" },
-    { id: "instagram", name: "Instagram plugins and content" },
-    { id: "linkedin", name: "LinkedIn plugins and content" },
-    { id: "myfonts", name: "MyFonts" },
-    { id: "openstreetmap", name: "OpenStreetMap" },
-    { id: "pinterest", name: "Pinterest plugins and content" },
-    { id: "spotify", name: "Spotify" },
-    { id: "twitter", name: "X (formerly Twitter) plugins and content" },
-    { id: "youtube-videos", name: "YouTube videos" },
-    { id: "youtube-no-cookie", name: 'YouTube videos ("no-cookie")' },
-    { id: "vimeo", name: "Vimeo plugins and buttons" },
-    { id: "vimeo-player", name: "Vimeo video player" },
-  ]
-
-  const serviceProviders = [
-    { id: "easyname", name: "Easyname" },
-    { id: "doodle", name: "Doodle" },
-    { id: "getnotify", name: "GetNotify" },
-    { id: "wetransfer", name: "WeTransfer" },
-  ]
-
-  const toggleContentProvider = (providerId: string) => {
-    if (selectedContentProviders.includes(providerId)) {
-      setSelectedContentProviders(selectedContentProviders.filter((id) => id !== providerId))
-    } else {
-      setSelectedContentProviders([...selectedContentProviders, providerId])
+  const toggleExplanation = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.style.display = element.style.display === 'none' ? 'block' : 'none';
     }
-  }
-
-  const toggleServiceProvider = (providerId: string) => {
-    if (selectedServiceProviders.includes(providerId)) {
-      setSelectedServiceProviders(selectedServiceProviders.filter((id) => id !== providerId))
-    } else {
-      setSelectedServiceProviders([...selectedServiceProviders, providerId])
-    }
-  }
-
-  const filteredContentProviders = contentProviders.filter((provider) =>
-    provider.name.toLowerCase().includes(searchTerm1.toLowerCase()),
-  )
-
-  const filteredServiceProviders = serviceProviders.filter((provider) =>
-    provider.name.toLowerCase().includes(searchTerm2.toLowerCase()),
-  )
-
-  const selectAllContentProviders = () => {
-    setSelectedContentProviders(contentProviders.map((provider) => provider.id))
-    openDialog(
-      "All Content Providers Selected",
-      "You have selected all available content providers. You can deselect individual providers if needed.",
-    )
-  }
-
-  const selectAllServiceProviders = () => {
-    setSelectedServiceProviders(serviceProviders.map((provider) => provider.id))
-    openDialog(
-      "All Service Providers Selected",
-      "You have selected all available service providers. You can deselect individual providers if needed.",
-    )
-  }
-
-  const openDialog = (title: string, description: string) => {
-    setDialogContent({ title, description })
-    setIsDialogOpen(true)
-  }
+  };
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-4 space-y-8">
-      <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
-        <div className="mb-6">
-          <h2 className="text-lg font-medium mb-2">
-            Do you integrate third-party content, such as social media, plugins, YouTube videos, fonts, etc., into your
-            online offering?
-          </h2>
-          <p
-            className="text-sm text-gray-500 cursor-pointer"
-            onClick={() =>
-              openDialog(
-                "Third-Party Content Explanation",
-                "Third-party content includes elements like social media plugins, embedded videos, fonts, maps, and other content that is loaded from external servers. This can have privacy implications as user data might be shared with these third parties.",
-              )
-            }
-          >
-            (Show explanation)
-          </p>
-        </div>
-
-        <div className="flex items-center mb-6 gap-4">
-          <Button
-            variant={useThirdPartyContent ? "default" : "outline"}
-            className="w-20"
-            onClick={() => {
-              setUseThirdPartyContent(true)
-              openDialog(
-                "Third-Party Content Enabled",
-                "You've enabled third-party content integration. Please select the specific providers below.",
-              )
-            }}
-          >
-            ja
-          </Button>
-          <Button
-            variant={!useThirdPartyContent ? "default" : "outline"}
-            className="w-20"
-            onClick={() => {
-              setUseThirdPartyContent(false)
-              openDialog(
-                "Third-Party Content Disabled",
-                "You've disabled third-party content integration. This section will be excluded from your privacy policy.",
-              )
-            }}
-          >
-            nein
-          </Button>
-        </div>
-
-        {useThirdPartyContent && (
-          <>
-            <p className="mb-4">Please select the providers of the external content:</p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-              {filteredContentProviders.map((provider) => (
-                <Card
-                  key={provider.id}
-                  className={`p-4 cursor-pointer hover:bg-gray-100 transition-colors ${
-                    selectedContentProviders.includes(provider.id) ? "bg-gray-200" : "bg-gray-100"
-                  }`}
-                  onClick={() => toggleContentProvider(provider.id)}
+    <div className="max-w-4xl mx-auto p-4 space-y-6">
+      {/* Contact Management Consent Section */}
+      <Card>
+        <CardContent className="pt-6">
+          <div className="mb-4">
+            <div className="flex items-start justify-between">
+              <div>
+                <h3 className="text-lg font-medium">
+                  Bieten Sie Möglichkeiten der Kontaktaufnahme und Kommunikation für Nutzer, Kunden oder andere
+                  Kommunikationspartner sowie der Anfrageverwaltung (z. B. Customer Relationship Management (CRM) oder
+                  Ticketing) an?
+                </h3>
+                <button 
+                  onClick={() => toggleExplanation('contact-explanation')}
+                  className="text-blue-500 text-sm hover:underline"
                 >
-                  <div className="text-xs text-center h-full flex items-center justify-center">{provider.name}</div>
-                </Card>
-              ))}
-            </div>
-
-            <div className="mt-6 flex flex-col md:flex-row items-center justify-between gap-4">
-              <div className="w-full md:w-1/2 flex items-center gap-2">
-                <Label>Vorteil Premium: Aus über 2.000 weiteren Modulen auswählen</Label>
-                <Switch
-                  checked={false}
-                  onCheckedChange={() => {
-                    openDialog(
-                      "Premium Feature",
-                      "This premium feature allows you to access over 2,000 additional modules. Please upgrade your plan to use this feature.",
-                    )
-                  }}
-                />
+                  [Erläuterungen anzeigen]
+                </button>
+                <div id="contact-explanation" className="mt-2 text-sm text-gray-600" style={{ display: 'none' }}>
+                  Hier würden die Erläuterungen zum Thema Kontaktaufnahme erscheinen.
+                </div>
               </div>
-              <Button
-                variant="link"
-                onClick={() => {
-                  selectAllContentProviders()
-                }}
-                className="text-blue-600"
-              >
-                Show all
-              </Button>
             </div>
 
-            <div className="mt-4">
-              <Button
-                variant="outline"
-                className="bg-blue-50 text-blue-600 hover:bg-blue-100"
-                onClick={() =>
-                  openDialog(
-                    "Content Provider Preview",
-                    "This preview shows how the selected content providers will appear in your privacy policy.",
-                  )
-                }
+            <div className="mt-4 flex gap-2">
+              <Button 
+                variant={contactConsent === 'ja' ? 'default' : 'outline'}
+                className={`w-16 ${contactConsent === 'ja' ? 'bg-green-500 hover:bg-green-600' : ''}`}
+                onClick={() => setContactConsent('ja')}
               >
-                Show preview
+                ja
+              </Button>
+              <Button 
+                variant={contactConsent === 'nein' ? 'default' : 'outline'}
+                className={`w-16 ${contactConsent === 'nein' ? 'bg-gray-300 hover:bg-gray-400' : ''}`}
+                onClick={() => setContactConsent('nein')}
+              >
+                nein
               </Button>
             </div>
-          </>
-        )}
-      </div>
+          </div>
 
-      <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
-        <div className="mb-6">
-          <h2 className="text-lg font-medium mb-2">
-            Do you use third-party services, platforms, and software for organizational, administrative, planning, or
-            other support tools?
-          </h2>
-          <p
-            className="text-sm text-gray-500 cursor-pointer"
-            onClick={() =>
-              openDialog(
-                "Third-Party Services Explanation",
-                "Third-party services include tools and platforms used for organizational, administrative, or planning purposes. These services may process user data according to their own privacy policies.",
-              )
-            }
-          >
-            (Show explanation)
-          </p>
-        </div>
+          {contactConsent === 'ja' && (
+            <div className="mt-6">
+              <p className="mb-2">Bitte wählen Sie einen der Anbieter von Kommunikations und CRM-Diensten aus:</p>
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
+                {contactProviders.map((provider) => (
+                  <ProviderBox
+                    key={provider}
+                    name={provider}
+                    isSelected={selectedContactProvider === provider}
+                    onClick={() => setSelectedContactProvider(provider)}
+                  />
+                ))}
+              </div>
+              
+              <div className="mt-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div className="flex items-center">
+                  <span className="text-sm">Vorteil Premium: Aus über 2.300 weiteren Modulen auswählen</span>
+                  <Button variant="ghost" size="icon" className="ml-2">
+                    <HelpCircle size={16} />
+                  </Button>
+                </div>
+                <div className="relative w-full sm:w-auto flex items-center">
+                  <div className="relative w-full sm:w-auto flex items-center">
+                    <Input
+                      type="text"
+                      placeholder="Suchen..."
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      className="pr-8 w-full"
+                    />
+                    <Search size={16} className="absolute right-2 text-gray-400" />
+                  </div>
+                  <Button variant="link" className="text-blue-500 ml-2 whitespace-nowrap">
+                    Alle anzeigen
+                  </Button>
+                </div>
+              </div>
+              
+              <div className="mt-4">
+                <Button variant="outline" className="text-blue-500 bg-blue-50">
+                  Vorschau anzeigen
+                </Button>
+              </div>
+            </div>
+          )}
+        </CardContent>
+      </Card>
 
-        <div className="flex items-center mb-6 gap-4">
-          <Button
-            variant={useThirdPartyServices ? "default" : "outline"}
-            className="w-20"
-            onClick={() => {
-              setUseThirdPartyServices(true)
-              openDialog(
-                "Third-Party Services Enabled",
-                "You've enabled third-party services. Please select the specific service providers below.",
-              )
-            }}
-          >
-            ja
-          </Button>
-          <Button
-            variant={!useThirdPartyServices ? "default" : "outline"}
-            className="w-20"
-            onClick={() => {
-              setUseThirdPartyServices(false)
-              openDialog(
-                "Third-Party Services Disabled",
-                "You've disabled third-party services. This section will be excluded from your privacy policy.",
-              )
-            }}
-          >
-            nein
-          </Button>
-        </div>
-
-        {useThirdPartyServices && (
-          <>
-            <p className="mb-4">Please select one of the service providers, platforms or tools:</p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {filteredServiceProviders.map((provider) => (
-                <Card
-                  key={provider.id}
-                  className={`p-4 cursor-pointer hover:bg-gray-100 transition-colors ${
-                    selectedServiceProviders.includes(provider.id) ? "bg-gray-200" : "bg-gray-100"
-                  }`}
-                  onClick={() => toggleServiceProvider(provider.id)}
+      {/* Messenger Consent Section */}
+      <Card>
+        <CardContent className="pt-6">
+          <div className="mb-4">
+            <div className="flex items-start justify-between">
+              <div>
+                <h3 className="text-lg font-medium">
+                  Setzen Sie Messenger zu Kommunikationszwecken (z. B. mit Kunden via WhatsApp) ein?
+                </h3>
+                <button 
+                  onClick={() => toggleExplanation('messenger-explanation')}
+                  className="text-blue-500 text-sm hover:underline"
                 >
-                  <div className="text-xs text-center h-full flex items-center justify-center">{provider.name}</div>
-                </Card>
-              ))}
-            </div>
-
-            <div className="mt-6 flex flex-col md:flex-row items-center justify-between gap-4">
-              <div className="w-full md:w-1/2 flex items-center gap-2">
-                <Label>Vorteil Premium: Aus über 2.000 weiteren Modulen auswählen</Label>
-                <Switch
-                  checked={false}
-                  onCheckedChange={() => {
-                    openDialog(
-                      "Premium Feature",
-                      "This premium feature allows you to access over 2,000 additional modules. Please upgrade your plan to use this feature.",
-                    )
-                  }}
-                />
+                  [Erläuterungen anzeigen]
+                </button>
+                <div id="messenger-explanation" className="mt-2 text-sm text-gray-600" style={{ display: 'none' }}>
+                  Hier würden die Erläuterungen zum Thema Messenger erscheinen.
+                </div>
               </div>
-              <Button
-                variant="link"
-                onClick={() => {
-                  selectAllServiceProviders()
-                }}
-                className="text-blue-600"
-              >
-                Show all
-              </Button>
             </div>
 
-            <div className="mt-4">
-              <Button
-                variant="outline"
-                className="bg-blue-50 text-blue-600 hover:bg-blue-100"
-                onClick={() =>
-                  openDialog(
-                    "Service Provider Preview",
-                    "This preview shows how the selected service providers will appear in your privacy policy.",
-                  )
-                }
+            <div className="mt-4 flex gap-2">
+              <Button 
+                variant={messengerConsent === 'ja' ? 'default' : 'outline'}
+                className={`w-16 ${messengerConsent === 'ja' ? 'bg-green-500 hover:bg-green-600' : ''}`}
+                onClick={() => setMessengerConsent('ja')}
               >
-                Show preview
+                ja
+              </Button>
+              <Button 
+                variant={messengerConsent === 'nein' ? 'default' : 'outline'}
+                className={`w-16 ${messengerConsent === 'nein' ? 'bg-gray-300 hover:bg-gray-400' : ''}`}
+                onClick={() => setMessengerConsent('nein')}
+              >
+                nein
               </Button>
             </div>
-          </>
-        )}
-      </div>
+          </div>
 
-      {/* Global Dialog */}
-      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>{dialogContent.title}</DialogTitle>
-            <DialogDescription>{dialogContent.description}</DialogDescription>
-          </DialogHeader>
-          <DialogFooter>
-            <Button onClick={() => setIsDialogOpen(false)}>Close</Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+          {messengerConsent === 'ja' && (
+            <div className="mt-6">
+              <p className="mb-2">Bitte wählen Sie einen Messenger oder ChatAnbieter aus:</p>
+              
+              <div className="mt-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div className="flex items-center">
+                  <span className="text-sm">Vorteil Premium: Aus über 2.300 weiteren Modulen auswählen</span>
+                  <Button variant="ghost" size="icon" className="ml-2">
+                    <HelpCircle size={16} />
+                  </Button>
+                </div>
+                <div className="relative w-full sm:w-auto flex items-center">
+                  <div className="relative w-full sm:w-auto flex items-center">
+                    <Input
+                      type="text"
+                      placeholder="Suchen..."
+                      className="pr-8 w-full"
+                    />
+                    <Search size={16} className="absolute right-2 text-gray-400" />
+                  </div>
+                  <Button variant="link" className="text-blue-500 ml-2 whitespace-nowrap">
+                    Alle anzeigen
+                  </Button>
+                </div>
+              </div>
+              
+              <div className="mt-4">
+                <Button variant="outline" className="text-blue-500 bg-blue-50">
+                  Vorschau anzeigen
+                </Button>
+              </div>
+            </div>
+          )}
+        </CardContent>
+      </Card>
+
+      {/* Chatbot Consent Section */}
+      <Card>
+        <CardContent className="pt-6">
+          <div className="mb-4">
+            <div className="flex items-start justify-between">
+              <div>
+                <h3 className="text-lg font-medium">
+                  Setzen Sie Chatbots oder Chatfunktionen zu Kommunikationszwecken ein?
+                </h3>
+                <button 
+                  onClick={() => toggleExplanation('chatbot-explanation')}
+                  className="text-blue-500 text-sm hover:underline"
+                >
+                  [Erläuterungen anzeigen]
+                </button>
+                <div id="chatbot-explanation" className="mt-2 text-sm text-gray-600" style={{ display: 'none' }}>
+                  Hier würden die Erläuterungen zum Thema Chatbots erscheinen.
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-4 flex gap-2">
+              <Button 
+                variant={chatbotConsent === 'ja' ? 'default' : 'outline'}
+                className={`w-16 ${chatbotConsent === 'ja' ? 'bg-green-500 hover:bg-green-600' : ''}`}
+                onClick={() => setChatbotConsent('ja')}
+              >
+                ja
+              </Button>
+              <Button 
+                variant={chatbotConsent === 'nein' ? 'default' : 'outline'}
+                className={`w-16 ${chatbotConsent === 'nein' ? 'bg-gray-300 hover:bg-gray-400' : ''}`}
+                onClick={() => setChatbotConsent('nein')}
+              >
+                nein
+              </Button>
+            </div>
+          </div>
+
+          {chatbotConsent === 'ja' && (
+            <div className="mt-6">
+              <p className="mb-2">Bitte wählen Sie die eingesetzten Anbieter aus:</p>
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
+                {chatbotProviders.map((provider) => (
+                  <ProviderBox
+                    key={provider}
+                    name={provider}
+                    isSelected={selectedChatbotProvider === provider}
+                    onClick={() => setSelectedChatbotProvider(provider)}
+                  />
+                ))}
+              </div>
+              
+              <div className="mt-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div className="flex items-center">
+                  <span className="text-sm">Vorteil Premium: Aus über 2.300 weiteren Modulen auswählen</span>
+                  <Button variant="ghost" size="icon" className="ml-2">
+                    <HelpCircle size={16} />
+                  </Button>
+                </div>
+                <div className="relative w-full sm:w-auto flex items-center">
+                  <div className="relative w-full sm:w-auto flex items-center">
+                    <Input
+                      type="text"
+                      placeholder="Suchen..."
+                      className="pr-8 w-full"
+                    />
+                    <Search size={16} className="absolute right-2 text-gray-400" />
+                  </div>
+                  <Button variant="link" className="text-blue-500 ml-2 whitespace-nowrap">
+                    Alle anzeigen
+                  </Button>
+                </div>
+              </div>
+              
+              <div className="mt-4">
+                <Button variant="outline" className="text-blue-500 bg-blue-50">
+                  Vorschau anzeigen
+                </Button>
+              </div>
+            </div>
+          )}
+        </CardContent>
+      </Card>
+
+      {/* Push Notifications Consent Section */}
+      <Card>
+        <CardContent className="pt-6">
+          <div className="mb-4">
+            <div className="flex items-start justify-between">
+              <div>
+                <h3 className="text-lg font-medium">
+                  Können Nutzer dem Erhalt von Push-Nachrichten (z. B. im Browser oder in einer mobilen App) zustimmen?
+                </h3>
+                <button 
+                  onClick={() => toggleExplanation('push-explanation')}
+                  className="text-blue-500 text-sm hover:underline"
+                >
+                  [Erläuterungen anzeigen]
+                </button>
+                <div id="push-explanation" className="mt-2 text-sm text-gray-600" style={{ display: 'none' }}>
+                  Hier würden die Erläuterungen zum Thema Push-Nachrichten erscheinen.
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-4 flex gap-2">
+              <Button 
+                variant={pushConsent === 'ja' ? 'default' : 'outline'}
+                className={`w-16 ${pushConsent === 'ja' ? 'bg-green-500 hover:bg-green-600' : ''}`}
+                onClick={() => setPushConsent('ja')}
+              >
+                ja
+              </Button>
+              <Button 
+                variant={pushConsent === 'nein' ? 'default' : 'outline'}
+                className={`w-16 ${pushConsent === 'nein' ? 'bg-gray-300 hover:bg-gray-400' : ''}`}
+                onClick={() => setPushConsent('nein')}
+              >
+                nein
+              </Button>
+            </div>
+          </div>
+
+          {pushConsent === 'ja' && (
+            <div className="mt-6 space-y-6">
+              <div>
+                <p className="mb-2">Bitte wählen Sie, sofern zutreffend, aus den folgenden Optionen oder Ergänzungsmöglichkeiten aus:</p>
+                
+                <div className="mt-4">
+                  <p className="text-sm mb-2">Optional: Bitte geben Sie die Inhalte Ihrer Push-Nachrichten an:</p>
+                  <Textarea 
+                    className="min-h-[120px]"
+                    placeholder="Zum Beispiel (die Beispiele finden Sie auch im Erläuterungsbereich des Moduls):
+&quot;Informationen zu uns, unseren Leistungen, Aktionen und Angeboten.&quot;
+&quot;Hinweise auf neueste Beiträge und Kommentare.&quot;
+&quot;Technische Hinweise und Änderungen unserer Applikation sowie ihrer Funktionen.&quot;"
+                  />
+                </div>
+
+                <div className="mt-6">
+                  <p className="text-sm mb-2">Optional: Falls Sie eigene Möglichkeiten Push-Nachrichten abzubestellen oder zu ändern anbieten, beschreiben Sie diese oder/und geben eine URL ein:</p>
+                  <Textarea 
+                    className="min-h-[120px]"
+                    placeholder="Zum Beispiel (die Beispiele finden Sie auch im Erläuterungsbereich des Moduls):
+&quot;Unsere Push-Nachrichten können Sie mit den folgenden Einstellungen anpassen oder abbestellen: [Gebe der Optionen]&quot;
+&quot;Unsere Push-Nachrichten können Sie auf der folgenden Webseite anpassen oder abbestellen: https://...&quot;
+&quot;Unsere Push-Nachrichten können Sie in dem Bereich &quot;Einstellungen&quot; unserer App anpassen oder abbestellen.&quot;"
+                  />
+                </div>
+
+                <div className="mt-6">
+                  <p className="mb-2">Falls Sie einen Dienstleister, bzw. Service für den Versand von Push-Nachrichten einsetzen, wählen Sie ihn bitte aus:</p>
+                  {/* Service provider selection would go here */}
+                </div>
+              </div>
+              
+              <div className="mt-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div className="flex items-center">
+                  <span className="text-sm">Vorteil Premium: Aus über 2.300 weiteren Modulen auswählen</span>
+                  <Button variant="ghost" size="icon" className="ml-2">
+                    <HelpCircle size={16} />
+                  </Button>
+                </div>
+                <div className="relative w-full sm:w-auto flex items-center">
+                  <div className="relative w-full sm:w-auto flex items-center">
+                    <Input
+                      type="text"
+                      placeholder="Suchen..."
+                      className="pr-8 w-full"
+                    />
+                    <Search size={16} className="absolute right-2 text-gray-400" />
+                  </div>
+                  <Button variant="link" className="text-blue-500 ml-2 whitespace-nowrap">
+                    Alle anzeigen
+                  </Button>
+                </div>
+              </div>
+              
+              <div className="mt-4">
+                <Button variant="outline" className="text-blue-500 bg-blue-50">
+                  Vorschau anzeigen
+                </Button>
+              </div>
+            </div>
+          )}
+        </CardContent>
+      </Card>
     </div>
-  )
+  );
 }
-
-export default Step18

@@ -29,22 +29,22 @@ export default function Step8() {
   return (
     <div className="p-6 bg-gray-100 rounded-md max-w-4xl mx-auto">
       <h2 className="text-lg font-semibold mb-2">
-        Do you operate according to statutes or rules of procedure? (e.g., as an association or non-profit organization)
-      </h2>
-      <p className="text-sm text-blue-600 underline cursor-pointer mb-4">Show explanations</p>
+      Sind Sie nach einer Satzung oder einer Geschäftsordnung tätig? (z. B. als Verein oder gemeinnützige Organisation)
+         </h2>
+      <p className="text-sm text-blue-600 underline cursor-pointer mb-4">(Erläuterungen anzeigen)</p>
 
       <div className="flex gap-4 mb-6">
         <Button
           variant={isOperating === 'ja' ? 'default' : 'outline'}
           onClick={() => setIsOperating('ja')}
-          className={cn('w-20', isOperating === 'ja' && 'bg-green-500 hover:bg-green-600')}
+          className={cn('w-20', isOperating === 'ja' && 'bg-green-400 hover:bg-green-400')}
         >
           ja
         </Button>
         <Button
           variant={isOperating === 'nein' ? 'default' : 'outline'}
           onClick={() => setIsOperating('nein')}
-          className={cn('w-20', isOperating === 'nein' && 'bg-gray-400 hover:bg-gray-500')}
+          className={cn('w-20', isOperating === 'nein' && 'bg-orange-400 hover:bg-gray-200')}
         >
           nein
         </Button>
@@ -52,7 +52,7 @@ export default function Step8() {
 
       {isOperating === 'ja' && (
         <>
-          <p className="mb-4">Please select from the following options or input options, if applicable:</p>
+          <p className="mb-4">Bitte wählen Sie, sofern zutreffend, aus den folgenden Optionen oder Eingabemöglichkeiten aus:</p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
             {options.map((option) => (
@@ -64,7 +64,7 @@ export default function Step8() {
                   selectedOptions.includes(option.value) ? 'bg-green-500 text-white' : 'bg-gray-300 text-black'
                 )}
               >
-                <CardContent className="flex items-center justify-center p-6 text-center h-24">
+                <CardContent className="flex items-center justify-center p-2 text-center h-20  ">
                   {option.label}
                 </CardContent>
               </Card>
@@ -76,13 +76,13 @@ export default function Step8() {
             <Button variant="outline" size="icon">
               🔍
             </Button>
-            <p className="text-blue-600 text-sm underline cursor-pointer">Show all</p>
+            <p className="text-blue-600 text-sm underline cursor-pointer">Alle anzeigen</p>
           </div>
         </>
       )}
 
       <Button className="w-full bg-blue-100 text-black hover:bg-blue-200 shadow-md">
-        Show preview
+      Vorschau anzeigen
       </Button>
     </div>
   );

@@ -63,7 +63,7 @@ const FormSection = ({
         )}
       </div>
 
-      <p className="text-sm mb-4">Please select from the following options (if applicable)</p>
+      <p className="text-sm mb-4">Bieten Sie einen Blog (oder ein vergleichbares Publikationsmedium) an?</p>
       
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
         {options.map((option, index) => (

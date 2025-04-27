@@ -20,7 +20,7 @@ interface HostingService {
   name: string
 }
 
-export default function Step13() {
+export default function Stepwp() {
   const [useExternalServices, setUseExternalServices] = useState<boolean | null>(null)
   const [selectedServices, setSelectedServices] = useState<string[]>([])
 
@@ -32,14 +32,15 @@ export default function Step13() {
   })
 
   const hostingServices: HostingService[] = [
-    { id: "audio-hosting", name: "Audio hosting access statistics" },
-    { id: "blubrry", name: "Blubrry" },
-    { id: "libsyn", name: "Libsyn" },
-    { id: "podtrac", name: "Podtrac" },
-    { id: "podcast-publisher", name: "Podlove Podcast Publisher" },
-    { id: "podpage", name: "Podpage" },
-    { id: "soundcloud", name: "Soundcloud" },
-    { id: "spotify", name: "Spotify for Podcasters" },
+    { id: "audio-hosting", name: "Nutzer können Kommentare oder Beiträge hinterlassen" },
+    { id: "blubrry", name: "Kommentarabos" },
+    { id: "libsyn", name: "Abruf von WordPress-Emojis und -Smilies" },
+    { id: "podtrac", name: "Akismet Anti-Spam-Prüfung" },
+    { id: "podcast-publisher", name: "Hosting bei Blogger.com" },
+    { id: "podpage", name: "DISQUS-Kommentare" },
+    { id: "soundcloud", name: "Profilbilder von Gravatar" },
+    { id: "spotify", name: "Hosting bei Medium" },
+    { id: "spotify", name: "UpdraftPlus - Backup" },
   ]
 
   const toggleService = (serviceId: string) => {
@@ -54,13 +55,12 @@ export default function Step13() {
   }
 
   return (
-    <div className="max-w-3xl mx-auto p-4 bg-gray-100 rounded-lg">
+    <div className="max-w-3xl mt-5 mx-auto p-4 bg-gray-100 rounded-lg">
       <div className="mb-6">
-        <div className="bg-gray-200 p-4 rounded-lg mb-2">
+        <div className=" p-4 rounded-lg mb-2">
           <div className="flex items-center mb-1">
             <h2 className="text-lg font-medium">
-              Do you use external hosting services and/or analytics tools for your podcasts or music?
-            </h2>
+            Bieten Sie einen Blog (oder ein vergleichbares Publikationsmedium) an? </h2>
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
@@ -76,11 +76,11 @@ export default function Step13() {
                     }
                   >
                     <InfoIcon className="h-4 w-4" />
-                    <span className="sr-only">Show explanations</span>
+                    <span className="sr-only">(Erläuterungen anzeigen)</span>
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>
-                  <p className="max-w-xs">Information about external hosting services</p>
+                  <p className="max-w-xs">Bitte wählen Sie die eingesetzten Dienstleister (soweit zutreffend)</p>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
@@ -129,7 +129,7 @@ export default function Step13() {
 
         {useExternalServices && (
           <>
-            <div className="mb-2 text-sm">Please select the service providers used (if applicable)</div>
+            <div className="mb-2 text-sm">Bitte wählen Sie die eingesetzten Dienstleister (soweit zutreffend)</div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
               {hostingServices.map((service) => (
                 <Card
@@ -165,7 +165,7 @@ export default function Step13() {
                   )
                 }
               >
-                Show all
+              Alle anzeigen
               </Button>
             </div>
 
@@ -180,7 +180,7 @@ export default function Step13() {
                   )
                 }
               >
-                Show preview
+                Vorschau anzeigen
               </Button>
             </div>
           </>

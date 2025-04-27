@@ -54,12 +54,12 @@ export default function Step13() {
   }
 
   return (
-    <div className="max-w-3xl mx-auto p-4 bg-gray-100 rounded-lg">
+    <div className="max-w-3xl mt-5 mx-auto p-4 bg-gray-100 rounded-lg">
       <div className="mb-6">
-        <div className="bg-gray-200 p-4 rounded-lg mb-2">
+        <div className=" p-4 rounded-lg mb-2">
           <div className="flex items-center mb-1">
             <h2 className="text-lg font-medium">
-              Do you use external hosting services and/or analytics tools for your podcasts or music?
+            Setzen Sie externe Hosting-Dienste und/oder Analysetools für Ihre Podcasts oder Ihre Musik ein?
             </h2>
             <TooltipProvider>
               <Tooltip>
@@ -76,11 +76,11 @@ export default function Step13() {
                     }
                   >
                     <InfoIcon className="h-4 w-4" />
-                    <span className="sr-only">Show explanations</span>
+                    <span className="sr-only">(Erläuterungen anzeigen)</span>
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>
-                  <p className="max-w-xs">Information about external hosting services</p>
+                  <p className="max-w-xs">Bitte wählen Sie die eingesetzten Dienstleister (soweit zutreffend)</p>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
@@ -129,7 +129,7 @@ export default function Step13() {
 
         {useExternalServices && (
           <>
-            <div className="mb-2 text-sm">Please select the service providers used (if applicable)</div>
+            <div className="mb-2 text-sm">Bitte wählen Sie die eingesetzten Dienstleister (soweit zutreffend)</div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
               {hostingServices.map((service) => (
                 <Card

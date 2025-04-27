@@ -25,12 +25,13 @@ const Step1 = () => {
 
   return (
     <>
-      <div className="bg-gray-100 p-8">
+      <div className="bg-gray-100 p-8 mt-5">
         <div className="mb-10 text-left">
           <h2 className="text-2xl font-bold mb-2">Verwendungszwecke Ihrer Daten</h2>
           <p className="text-gray-700 max-w-3xl">
-            Wählen Sie aus, wofür Ihre Daten auf der Website verwendet werden. Jede Kachel steht für einen bestimmten
-            Zweck im Sinne der DSGVO.
+            Die Datenschutzerklärung wird aus einzelnen Modulen zusammengestellt, von denen Sie die wichtigsten in der folgenden Schnellauswahl wählen können. Die farbigen Module sind schon aktiv und entsprechen unserer Empfehlung.
+            <br />
+            Sie können die Vorauswahl entsprechend Ihren Wünschen anpassen, danach Ihre Daten eingeben sowie Ihre Auswahl weiter individualisieren.
           </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">

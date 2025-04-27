@@ -21,15 +21,21 @@ interface MarketingProvider {
   selected: boolean
 }
 
-export default function Step17() {
+export default function Stepdas() {
   const [consent, setConsent] = useState<boolean | null>(null)
   const [showExplanations, setShowExplanations] = useState(false)
   const [customOptOut, setCustomOptOut] = useState("")
   const [providers, setProviders] = useState<MarketingProvider[]>([
-    { id: "google-ads", name: "Google Ads (for-merly AdWords)", selected: false },
-    { id: "google-adsense-personalized", name: "Google Adsense with personalized ads", selected: false },
-    { id: "google-adsense-non-personalized", name: "Google Adsense with non-personalized ads", selected: false },
-    { id: "linkedin", name: "LinkedIn Insight Tag", selected: false },
+    { id: "google-ads", name: "Adobe Analytics", selected: false },
+    { id: "google-adsense-personalized", name: "Burst Statistics", selected: false },
+    { id: "google-adsense-non-personalized", name: "econda Analytics", selected: false },
+    { id: "linkedin", name: "etracker", selected: false },
+    { id: "linkedin", name: "Google Analytics (aktuelle Version 4)", selected: false },
+    { id: "linkedin", name: "Google Tag Manager", selected: false },
+    { id: "linkedin", name: "Jetpack (WordPress Stats)", selected: false },
+    { id: "linkedin", name: "Visual Website Optimizer", selected: false },
+    { id: "linkedin", name: "Zählmarken VG Wort / Skalierbares Zentrales Messverfahren", selected: false },
+    { id: "linkedin", name: "Yandex-Metrica" , selected: false },
   ])
 
   // Dialog state
@@ -69,12 +75,11 @@ export default function Step17() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-gray-100 rounded-md">
-      <div className="mb-6">
+    <div className="max-w-2xl mt-5 mx-auto p-6 bg-gray-200 rounded-md">
+       
+      <div className="mb-6 ">
         <h2 className="text-lg font-medium mb-2">
-          Do you use services and processes for online marketing purposes, e.g., for displaying advertisements,
-          targeting, conversion measurement, or remarketing?
-        </h2>
+        Setzen Sie Dienste und Verfahren zur Webanalyse, A/B - Testing und Optimierung ein?  </h2>
 
         <div className="mb-2">
           <button
@@ -89,13 +94,13 @@ export default function Step17() {
               }
             }}
           >
-            {showExplanations ? "Hide explanations" : "Show explanations"}
+            {showExplanations ? "Hide explanations" : "(Erläuterungen anzeigen)"}
           </button>
         </div>
 
         {showExplanations && (
           <div className="bg-white p-3 rounded mb-4 text-sm">
-            <p>This explains what marketing tracking is used for and how your data might be processed.</p>
+            {/* <p>This explains what marketing tracking is used for and how your data might be processed.</p> */}
           </div>
         )}
 
@@ -113,7 +118,7 @@ export default function Step17() {
             onClick={() => handleConsentChange(false)}
             className={cn(
               "w-20",
-              consent === false ? "bg-gray-500 hover:bg-gray-600" : "bg-gray-200 hover:bg-gray-300",
+              consent === false ? "bg-orange-500 hover:bg-orange-600" : "bg-gray-200 hover:bg-gray-300",
             )}
           >
             nein
@@ -123,7 +128,8 @@ export default function Step17() {
 
       {consent && (
         <div className="mb-6">
-          <p className="mb-3 text-sm">Please select the following providers and services, if used:</p>
+          <p className="mb-3 text-sm">Bitte wählen Sie einen der verwendeten Anbieter oder der Verfahren aus (bitte lesen Sie zudem die Erläuterungen):
+          </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
             {providers.map((provider) => (
@@ -131,7 +137,7 @@ export default function Step17() {
                 key={provider.id}
                 className={cn(
                   "cursor-pointer hover:bg-gray-50",
-                  provider.selected ? "border-green-500 bg-gray-50" : "bg-gray-200",
+                  provider.selected ? "border-green-500 hover:bg-green-600 bg-gray-50" : "bg-gray-200" ,
                 )}
                 onClick={() => toggleProvider(provider.id)}
               >
@@ -147,9 +153,8 @@ export default function Step17() {
       {consent && (
         <div className="mb-6">
           <p className="text-sm mb-3">
-            You can enter information about individual opt-out options here (e.g., opt-out/opt-out links or HTML code).
-            However, this information is not necessary if you use a cookie opt-in tool/banner and users can decide
-            whether cookies are set there:
+          Sie können an dieser Stelle Angaben zu individuellen Widerspruchsmöglichkeiten (z. B. Opt-Out-/ Widerspruchs-Links oder HTML-Code wie bei Matomo) eintragen. Diese Angaben sind jedoch nicht notwendig, wenn Sie ein Cookie-Opt-In-Tool/ Banner nutzen und Nutzer dort entscheiden können, ob Cookies gesetzt werden:
+
           </p>
 
           <Textarea value={customOptOut} onChange={(e) => setCustomOptOut(e.target.value)} className="min-h-32" />
@@ -186,7 +191,7 @@ export default function Step17() {
               )
             }
           >
-            Show all
+            Alle anzeigen
           </Button>
         </div>
       )}
@@ -202,7 +207,8 @@ export default function Step17() {
             )
           }
         >
-          Show preview
+          Alle anzeigen
+          
         </Button>
       </div>
 

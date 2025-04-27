@@ -32,7 +32,7 @@ export default function Step3() {
           <div
             key={index}
             className={`${
-              country.includes("Drittland") ? "bg-green-500 text-white" : "bg-gray-300"
+              country.includes("Drittland") ? "bg-gray-300 text-black" : "bg-gray-300"
             } aspect-square p-4 flex items-center justify-center text-center text-sm rounded-md`}
           >
             <span className="break-words leading-tight">{country}</span>

@@ -26,9 +26,9 @@ export default function Step17() {
   const [showExplanations, setShowExplanations] = useState(false)
   const [customOptOut, setCustomOptOut] = useState("")
   const [providers, setProviders] = useState<MarketingProvider[]>([
-    { id: "google-ads", name: "Google Ads (for-merly AdWords)", selected: false },
-    { id: "google-adsense-personalized", name: "Google Adsense with personalized ads", selected: false },
-    { id: "google-adsense-non-personalized", name: "Google Adsense with non-personalized ads", selected: false },
+    { id: "google-ads", name: "Google Ads (früher AdWords)", selected: false },
+    { id: "google-adsense-personalized", name: "Google Adsense mit personalisierten Anzeigen", selected: false },
+    { id: "google-adsense-non-personalized", name: "Google Adsense mit nicht-personalisierten Anzeigen", selected: false },
     { id: "linkedin", name: "LinkedIn Insight Tag", selected: false },
   ])
 
@@ -72,8 +72,7 @@ export default function Step17() {
     <div className="max-w-2xl mx-auto p-6 bg-gray-100 rounded-md">
       <div className="mb-6">
         <h2 className="text-lg font-medium mb-2">
-          Do you use services and processes for online marketing purposes, e.g., for displaying advertisements,
-          targeting, conversion measurement, or remarketing?
+        Setzen Sie Dienste und Verfahren zu Zwecken des Onlinemarketings, z. B. für die Anzeige von Werbeanzeigen, Zielgruppenbildung, Konversionsmessung oder Remarketing ein?
         </h2>
 
         <div className="mb-2">
@@ -89,7 +88,7 @@ export default function Step17() {
               }
             }}
           >
-            {showExplanations ? "Hide explanations" : "Show explanations"}
+            {showExplanations ? "Hide explanations" : "(Erläuterungen anzeigen)"}
           </button>
         </div>
 
@@ -123,7 +122,7 @@ export default function Step17() {
 
       {consent && (
         <div className="mb-6">
-          <p className="mb-3 text-sm">Please select the following providers and services, if used:</p>
+          <p className="mb-3 text-sm">Bitte wählen Sie, falls genutzt, die folgenden Anbieter und Dienste aus:</p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
             {providers.map((provider) => (
@@ -147,9 +146,9 @@ export default function Step17() {
       {consent && (
         <div className="mb-6">
           <p className="text-sm mb-3">
-            You can enter information about individual opt-out options here (e.g., opt-out/opt-out links or HTML code).
-            However, this information is not necessary if you use a cookie opt-in tool/banner and users can decide
-            whether cookies are set there:
+          Sie können an dieser Stelle Angaben zu individuellen Widerspruchsmöglichkeiten (z. B. Opt-Out-/ Widerspruchs-Links oder HTML-Code) eintragen. Diese Angaben sind jedoch nicht notwendig, wenn Sie ein Cookie-Opt-In-Tool/ Banner nutzen und Nutzer dort entscheiden können, ob Cookies gesetzt werden:
+
+
           </p>
 
           <Textarea value={customOptOut} onChange={(e) => setCustomOptOut(e.target.value)} className="min-h-32" />

@@ -47,11 +47,10 @@ export default function Step15() {
     <div className="bg-gray-100 p-6 max-w-4xl mx-auto">
       <div className="mb-6">
         <h2 className="text-gray-800 mb-2">
-          Do you participate in customer review or rating processes or integrate corresponding widgets into your shops,
-          apps or websites?
+        Nehmen Sie an Kundenrezensions-, bzw. Bewertungsverfahren teil oder binden entsprechende Widgets in Ihre Shops, Apps oder Webseiten ein?
         </h2>
         <div
-          className="text-blue-600 hover:underline text-sm cursor-pointer mb-3"
+          className="text-black-600 hover:underline text-sm cursor-pointer mb-3"
           onClick={() =>
             openDialog(
               "Review Process Explanation",
@@ -59,7 +58,7 @@ export default function Step15() {
             )
           }
         >
-          [Show explanation]
+         (Erläuterungen anzeigen)
         </div>
 
         <div className="flex gap-2 mb-6">
@@ -89,10 +88,10 @@ export default function Step15() {
         </div>
 
         <div className="mb-6">
-          <p className="text-gray-700 mb-3">Please select the procedures you use:</p>
+          <p className="text-gray-700 mb-3">Bitte wählen Sie die von Ihnen eingesetzten Vefahren aus:</p>
 
           <Card
-            className={`w-48 p-4 cursor-pointer ${selectedProcedure === "integration" ? "border-blue-500 border-2" : "border-gray-200"}`}
+            className={`w-48 p-4 cursor-pointer ${selectedProcedure === "integration" ? "border-green-500 border-2" : "border-gray-200"}`}
             onClick={() => {
               setSelectedProcedure("integration")
               openDialog(
@@ -101,18 +100,18 @@ export default function Step15() {
               )
             }}
           >
-            <div className="text-blue-600 text-center">Integration of review and rating widgets</div>
+            <div className="text-black-600 text-center">Bitte wählen Sie eine Bewertungsplattform aus</div>
           </Card>
         </div>
 
         <div className="mb-6">
-          <p className="text-gray-700 mb-3">Please select a review platform:</p>
+          <p className="text-gray-700 mb-3"></p>
 
           <div className="grid grid-cols-3 gap-4 mb-6">
             {reviewPlatforms.slice(0, 6).map((platform) => (
               <Card
                 key={platform.id}
-                className={`p-4 cursor-pointer flex items-center justify-center ${selectedPlatform === platform.id ? "border-blue-500 border-2" : "border-gray-200"}`}
+                className={`p-4 cursor-pointer flex items-center justify-center ${selectedPlatform === platform.id ? "bg-green-500 border-2" : "border-gray-200"}`}
                 onClick={() => {
                   setSelectedPlatform(platform.id)
                   openDialog(
@@ -121,7 +120,7 @@ export default function Step15() {
                   )
                 }}
               >
-                <div className="text-blue-600 text-center">{platform.name}</div>
+                <div className="text-black-600 text-center">{platform.name}</div>
               </Card>
             ))}
           </div>
@@ -130,7 +129,7 @@ export default function Step15() {
             {reviewPlatforms.slice(6, 10).map((platform) => (
               <Card
                 key={platform.id}
-                className={`p-4 cursor-pointer flex items-center justify-center ${selectedPlatform === platform.id ? "border-blue-500 border-2" : "border-gray-200"}`}
+                className={`p-4 cursor-pointer flex items-center justify-center ${selectedPlatform === platform.id ? "bg-green-500 border-2" : "border-gray-200"}`}
                 onClick={() => {
                   setSelectedPlatform(platform.id)
                   openDialog(
@@ -139,7 +138,7 @@ export default function Step15() {
                   )
                 }}
               >
-                <div className="text-blue-600 text-center">{platform.name}</div>
+                <div className="text-black-600 text-center">{platform.name}</div>
               </Card>
             ))}
           </div>
@@ -150,7 +149,7 @@ export default function Step15() {
             Visited Premium: Aus über 2.300 weiteren Modulen auswählen
           </Badge>
           <Info
-            className="text-blue-500 w-5 h-5 cursor-pointer"
+            className="text-black-500 w-5 h-5 cursor-pointer"
             onClick={() =>
               openDialog(
                 "Premium Information",
@@ -160,7 +159,7 @@ export default function Step15() {
           />
           <Button
             variant="ghost"
-            className="text-blue-600 hover:text-blue-800 p-0 h-auto"
+            className="text-black-600 hover:text-blue-800 p-0 h-auto"
             onClick={() =>
               openDialog(
                 "All Platforms",
@@ -168,13 +167,14 @@ export default function Step15() {
               )
             }
           >
-            Show all
+           
+Alle anzeigen
           </Button>
         </div>
 
         <Button
           variant="secondary"
-          className="text-blue-600 bg-blue-50 hover:bg-blue-100 px-4 py-1"
+          className="text-black-600 bg-blue-50 hover:bg-green-100 px-4 py-1"
           onClick={() =>
             openDialog(
               "Review Preview",
@@ -182,7 +182,7 @@ export default function Step15() {
             )
           }
         >
-          Show preview
+          Vorschau anzeigen
         </Button>
       </div>
 

@@ -19,6 +19,7 @@ import cookie from "@/public/cookie.png"
 import credit from "@/public/credit.png"
 import email from "@/public/email.png"
 import euro from "@/public/euro.png"
+import profile1 from "@/public/ppl.png"
 import persons from "@/public/persons.png"
 import Step8 from "./Steps/Step8"
 import Step9 from "./Steps/Step9"
@@ -39,7 +40,15 @@ import tool from "@/public/tool.png"
 import drawer from "@/public/drawer.png"
 import bars from "@/public/bars.png"
 import welcome from "@/public/welcome.png"
-
+import country from "@/public/country.png"
+import Step19 from "./Steps/Step19"
+import Step9C from "./Steps/Step9C"
+import Stepwp from "./Steps/Stepwp"
+import Stepdas from "./Steps/Stepdas"
+import Stepmouse from "./Steps/Stepmouse"
+import Steptool from "./Steps/Steptool"
+import Step18 from "./Steps/Step18"
+import Stepcredit from "./Steps/Stepcredit"
 
 interface ExpandedSections {
   quickSelection: boolean
@@ -103,6 +112,9 @@ function App() {
       [section]: !expandedSections[section],
     })
   }
+
+  const [checked, setChecked] = useState(false);
+  const [domain, setDomain] = useState("");
 
   return (
     <div className="min-h-screen bg-white">
@@ -185,7 +197,7 @@ function App() {
                 <div className="p-2 m-4 bg-gray-100 flex items-center justify-center">
                   <div className="w-30 h-14 relative">
                     <Image
-                      src={welcome}
+                      src={profile1}
                       width={60}
                       height={60}
                       alt="Icon"
@@ -195,7 +207,8 @@ function App() {
                 </div>
                 <div className="flex-grow bg-green-600 text-white flex items-center px-4">
                   <span>
-                    Allgemeine Angaben: Betroffenenrechte, Rechtsgrundlagen, Datentransfers, Löschung, etc.
+
+                    Angaben zum Verantwortlichen und Datenschutzbeauftragten
                   </span>
                 </div>
                 <Button
@@ -220,7 +233,7 @@ function App() {
                 <div className="p-2 m-4 bg-gray-100 flex items-center justify-center">
                   <div className="w-30 h-14 relative">
                     <Image
-                      src={icon}
+                      src={country}
                       width={60}
                       height={60}
                       alt="Icon"
@@ -230,7 +243,7 @@ function App() {
                 </div>
                 <div className="flex-grow bg-green-600 text-white flex items-center px-4">
                   <span>
-                    Allgemeine Angaben: Betroffenenrechte, Rechtsgrundlagen, Datentransfers, Löschung, etc.
+                    Wählen Sie das Land aus, in dem Sie Ihren Wohn-, bzw. Geschäftssitz haben
                   </span>
                 </div>
                 <Button
@@ -255,7 +268,7 @@ function App() {
                 <div className="p-2 m-4 bg-gray-100 flex items-center justify-center">
                   <div className="w-30 h-14 relative">
                     <Image
-                      src={icon}
+                      src={welcome}
                       width={60}
                       height={60}
                       alt="Icon"
@@ -265,7 +278,8 @@ function App() {
                 </div>
                 <div className="flex-grow bg-green-600 text-white flex items-center px-4">
                   <span>
-                    Allgemeine Angaben: Betroffenenrechte, Rechtsgrundlagen, Datentransfers, Löschung, etc.
+
+                    Präambel (Einleitung) und Geltungsbereich
                   </span>
                 </div>
                 <Button
@@ -280,7 +294,7 @@ function App() {
 
           {/* Expanded preamble section */}
           {expandedSections.preamble && (
-            <Step5 />
+            <Step19 />
           )}
 
           {/* inform */}
@@ -300,6 +314,7 @@ function App() {
                 </div>
                 <div className="flex-grow bg-green-600 text-white flex items-center px-4">
                   <span>
+
                     Allgemeine Angaben: Betroffenenrechte, Rechtsgrundlagen, Datentransfers, Löschung, etc.
                   </span>
                 </div>
@@ -369,7 +384,8 @@ function App() {
                 </div>
                 <div className="flex-grow bg-green-600 text-white flex items-center px-4">
                   <span>
-                    Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).
+
+                    Geschäftliche Leistungen und Handelsplattformen
                   </span>
                 </div>
                 <Button
@@ -404,7 +420,8 @@ function App() {
                 </div>
                 <div className="flex-grow bg-green-600 text-white flex items-center px-4">
                   <span>
-                    Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).
+
+                    Zahlungsverfahren, Spenden, Bonitätsprüfung
                   </span>
                 </div>
                 <Button
@@ -419,7 +436,7 @@ function App() {
 
           {/* Expanded preamble section */}
           {expandedSections.calculator && (
-            <Step9 />
+            <Step9C />
           )}
 
           {/* thumbs */}
@@ -439,7 +456,8 @@ function App() {
                 </div>
                 <div className="flex-grow bg-green-600 text-white flex items-center px-4">
                   <span>
-                    Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).
+
+                    Social Media und soziale Netzwerke
                   </span>
                 </div>
                 <Button
@@ -454,7 +472,7 @@ function App() {
 
           {/* Expanded preamble section */}
           {expandedSections.thumbs && (
-            <Step9 />
+            <Step9C />
           )}
 
           {/* cookie */}
@@ -474,7 +492,8 @@ function App() {
                 </div>
                 <div className="flex-grow bg-green-600 text-white flex items-center px-4">
                   <span>
-                    Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).
+
+                    Cookies, Cookie-Einwilligung und -Management
                   </span>
                 </div>
                 <Button
@@ -493,7 +512,7 @@ function App() {
           )}
 
           {/* credit */}
-          <Card className="mt-4 shadow-none">
+          <Card className="mt-4 shadow-none ">
             <CardContent className="p-0">
               <div className="flex h-16">
                 <div className="p-2 p-4 bg-gray-100 flex items-center justify-center">
@@ -509,7 +528,7 @@ function App() {
                 </div>
                 <div className="flex-grow bg-green-600 text-white flex items-center px-4">
                   <span>
-                    Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).
+                    Registrierungsfunktionen, Single-Sign-On, Community (z. B. Forum)
                   </span>
                 </div>
                 <Button
@@ -523,7 +542,7 @@ function App() {
           </Card>
 
           {expandedSections.credit && (
-            <Step10 />
+            <Stepcredit />
           )}
 
           {/* headphone */}
@@ -543,7 +562,7 @@ function App() {
                 </div>
                 <div className="flex-grow bg-green-600 text-white flex items-center px-4">
                   <span>
-                    Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).
+                    Musik und Podcasts - Hosting, Widgets und Analysedienste
                   </span>
                 </div>
                 <Button
@@ -578,7 +597,8 @@ function App() {
                 </div>
                 <div className="flex-grow bg-green-600 text-white flex items-center px-4">
                   <span>
-                    Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).
+
+                    Gewinnspiele, Umfragen und Feedback
                   </span>
                 </div>
                 <Button
@@ -613,7 +633,7 @@ function App() {
                 </div>
                 <div className="flex-grow bg-green-600 text-white flex items-center px-4">
                   <span>
-                    Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).
+                    Newsletter und Werbekommunikation per E-Mail, SMS, Post, Telefon oder Fax
                   </span>
                 </div>
                 <Button
@@ -647,7 +667,8 @@ function App() {
                 </div>
                 <div className="flex-grow bg-green-600 text-white flex items-center px-4">
                   <span>
-                    Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).
+
+                    Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan)
                   </span>
                 </div>
                 <Button
@@ -682,7 +703,8 @@ function App() {
                 </div>
                 <div className="flex-grow bg-green-600 text-white flex items-center px-4">
                   <span>
-                    Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).
+
+                    Blogs und Publikationsmedien
                   </span>
                 </div>
                 <Button
@@ -697,7 +719,7 @@ function App() {
 
           {/* Expanded preamble section */}
           {expandedSections.wp && (
-            <Step12 />
+            <Stepwp />
           )}
 
           {/*   AD */}
@@ -717,7 +739,8 @@ function App() {
                 </div>
                 <div className="flex-grow bg-green-600 text-white flex items-center px-4">
                   <span>
-                    Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).
+
+                    Onlinemarketing und Vermarktung von Onlinewerbeflächen
                   </span>
                 </div>
                 <Button
@@ -752,7 +775,8 @@ function App() {
                 </div>
                 <div className="flex-grow bg-green-600 text-white flex items-center px-4">
                   <span>
-                    Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).
+
+                    Reichweitenmessung, Monitoring, Analyse, Optimierung (z. B. A/B Tests)
                   </span>
                 </div>
                 <Button
@@ -767,7 +791,7 @@ function App() {
 
           {/* Expanded preamble section */}
           {expandedSections.dashboard && (
-            <Step17 />
+            <Stepdas />
           )}
 
           {/* mouse */}
@@ -787,7 +811,7 @@ function App() {
                 </div>
                 <div className="flex-grow bg-green-600 text-white flex items-center px-4">
                   <span>
-                    Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).
+                    Angebot eigener und Teilnahme an Affiliate-Programmen
                   </span>
                 </div>
                 <Button
@@ -802,7 +826,7 @@ function App() {
 
           {/* Expanded preamble section */}
           {expandedSections.mouse && (
-            <Step16 />
+            <Stepmouse />
           )}
 
           {/* msg */}
@@ -822,7 +846,8 @@ function App() {
                 </div>
                 <div className="flex-grow bg-green-600 text-white flex items-center px-4">
                   <span>
-                    Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).
+
+                    Kommunikation, CRM, Messenger, Chats, Chatbots und Push-Nachrichten
                   </span>
                 </div>
                 <Button
@@ -837,7 +862,7 @@ function App() {
 
           {/* Expanded preamble section */}
           {expandedSections.msg && (
-            <Step12 />
+            <Step18 />
           )}
 
           {/* toool */}
@@ -857,7 +882,8 @@ function App() {
                 </div>
                 <div className="flex-grow bg-green-600 text-white flex items-center px-4">
                   <span>
-                    Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).
+
+                    Übrige Dienste, Tools, Plugins sowie fremde Inhalte und Funktionen
                   </span>
                 </div>
                 <Button
@@ -872,7 +898,7 @@ function App() {
 
           {/* Expanded preamble section */}
           {expandedSections.tool && (
-            <Step12 />
+            <Steptool />
           )}
 
           {/* drawer */}
@@ -892,7 +918,8 @@ function App() {
                 </div>
                 <div className="flex-grow bg-green-600 text-white flex items-center px-4">
                   <span>
-                    Vereine, Parteien, NGOs (Verarbeitung nach Satzung/Geschäftsplan).
+
+                    Bereitstellung des Onlineangebotes, Hosting, Homepage-Baukästen
                   </span>
                 </div>
                 <Button
@@ -910,7 +937,11 @@ function App() {
             <Step10 />
           )}
 
-
+          {/* submit */}
+          <div className="bg-yellow-500 py-4 px-6 font-bold mt-6 text-white">Schritt 3: Create your document</div>
+          <button className="px-6 py-3 bg-blue-600 text-white text-center rounded-lg mt-4 hover:bg-blue-700 transition">
+            Click Me
+          </button>
 
         </div>
       </main>
